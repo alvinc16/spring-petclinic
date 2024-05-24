@@ -30,8 +30,16 @@ import org.springframework.validation.Validator;
  * @author Juergen Hoeller
  */
 public class PetValidator implements Validator {
+	static {
+
+	}
 
 	private static final String REQUIRED = "required";
+
+	private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+	private static final Calendar calendar = new GregorianCalendar(2020, Calendar.JANUARY, 1);
+
 
 	@Override
 	public void validate(Object obj, Errors errors) {
