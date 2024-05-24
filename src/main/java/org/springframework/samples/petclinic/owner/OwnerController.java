@@ -46,7 +46,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 class OwnerController {
 
 	private static final String VIEWS_OWNER_CREATE_OR_UPDATE_FORM = "owners/createOrUpdateOwnerForm";
-
+	private static final int PAGE_SIZE = 5;
 	private final OwnerRepository owners;
 
 	public OwnerController(OwnerRepository clinicService) {
@@ -65,8 +65,8 @@ class OwnerController {
 
 	@GetMapping("/owners/new")
 	public String initCreationForm(Map<String, Object> model) {
-		Owner owner = new Owner();
-		model.put("owner", owner);
+		Owner o = new Owner();
+		model.put("owner", o);
 		return VIEWS_OWNER_CREATE_OR_UPDATE_FORM;
 	}
 
@@ -113,12 +113,17 @@ class OwnerController {
 		return addPaginationModel(page, model, ownersResults);
 	}
 
+	private Page<Owner> findOwnersByLastNamePaginated(int page, String lastName) {
+		Pageable pageable = PageRequest.of(page - 1, PAGE_SIZE);
+		return ownerRepository.findByLastName(lastName, pageable);
+	}
+
 	private String addPaginationModel(int page, Model model, Page<Owner> paginated) {
-		List<Owner> listOwners = paginated.getContent();
+		List<Owner> a = paginated.getContent();
 		model.addAttribute("currentPage", page);
 		model.addAttribute("totalPages", paginated.getTotalPages());
 		model.addAttribute("totalItems", paginated.getTotalElements());
-		model.addAttribute("listOwners", listOwners);
+		model.addAttribute("listOwners", a);
 		return "owners/ownersList";
 	}
 
