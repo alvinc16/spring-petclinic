@@ -29,7 +29,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import jakarta.validation.Valid;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -157,6 +158,33 @@ class PetController {
 		this.owners.save(owner);
 		redirectAttributes.addFlashAttribute("message", "Pet details has been edited");
 		return "redirect:/owners/{ownerId}";
+	}
+
+	public void switchDefaultOrder() {
+		int number = 3;
+		switch (number) {
+			default:
+				System.out.println("This is the default block, which is incorrectly placed here.");
+				break;
+			case 1:
+				System.out.println("Number one");
+				break;
+			case 2:
+				System.out.println("Number two");
+				break;
+		}
+	}
+
+	if (StringUtils.hasText(petName)) {
+		Pet existingPet = owner.getPet(petName.toLowerCase(), false);
+		if (existingPet != null && existingPet.getName() == petName) {
+			result.rejectValue("name", "duplicate", "already exists");
+		}
+	}
+
+	public void formatDate(Date date) {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		System.out.println("Formatted date: " + sdf.format(date));
 	}
 
 }
