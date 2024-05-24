@@ -81,4 +81,27 @@ public class Pet extends NamedEntity {
 		getVisits().add(visit);
 	}
 
+	public void demoFinallyBlock() {
+		try {
+			System.out.println("Inside try block");
+		} finally {
+			// 空的finally块，没有任何语句，这是一个缺陷
+		}
+	}
+
+	public void demoTryBlock() {
+		try {
+			// 空的try块，没有包含任何语句，这是一个缺陷
+		} finally {
+			System.out.println("Inside finally block");
+		}
+	}
+
+	public void demoNullCheck() {
+		if (this.type != null && this.type.getName() != null) {
+			// 对象type已经检查过非null，再次检查getName()是否为null是不必要的
+			System.out.println("Type name is not null");
+		}
+	}
+
 }
