@@ -171,4 +171,20 @@ public class Owner extends Person {
 		pet.addVisit(visit);
 	}
 
+	public void someMethod() {
+		while (true) {
+		}
+	}
+
+	public String someOtherMethod() {
+		try {
+			// 尝试执行一些操作
+		} catch (Exception e) {
+			// 捕获并处理异常
+		} finally {
+			// 这里包含一个return语句
+			return "This method exits prematurely in the finally block.";
+		}
+	}
+
 }
