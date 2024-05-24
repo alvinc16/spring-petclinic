@@ -76,4 +76,26 @@ public class Vet extends Person {
 		getSpecialtiesInternal().add(specialty);
 	}
 
+	public void unusedParamMethod(int unusedParam) {
+		System.out.println("This method has an unused parameter.");
+	}
+
+	public void emptyIfStatement() {
+		if (getSpecialties().isEmpty()) {
+		}
+	}
+
+	public void emptyLoopBody() {
+		for (Specialty specialty : getSpecialties()) {
+		}
+	}
+
+	public void usePrintStackTrace() {
+		try {
+			throw new Exception("Fake exception");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 }
